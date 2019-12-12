@@ -1,7 +1,5 @@
 package fr.umontpellier.iut.conquest;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -144,6 +142,14 @@ public class Board {
      * Retourne la liste de tous les pions d'un joueur.
      */
     public int getNbPawns(Player player) {
-        throw new RuntimeException("Not implemented");
+        int nbPawns = 0;
+        for (Pawn[] row: field) {
+            for(Pawn pawn : row) {
+                if(pawn.getPlayer().equals(player)) {
+                    nbPawns++;
+                }
+            }
+        }
+        return nbPawns;
     }
 }
