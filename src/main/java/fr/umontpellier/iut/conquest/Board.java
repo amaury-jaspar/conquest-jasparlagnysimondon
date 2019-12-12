@@ -1,5 +1,7 @@
 package fr.umontpellier.iut.conquest;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -94,7 +96,27 @@ public class Board {
      * - La distance entre la case d'arrivée est au plus 2.
      */
     public boolean isValid(Move move, Player player) {
-        throw new RuntimeException("Not implemented");
+        int start_row = move.getRow1();
+        int start_column = move.getColumn1();
+        int end_row = move.getRow2();
+        int end_column = move.getColumn2();
+
+        int size = getSize();
+
+        if (end_row < 0 || end_row >= size || end_column < 0 || end_column >= size) {
+            return false;
+        } else if (start_row < 0 || start_row >= size || start_column < 0 || start_column >= size) {
+            return false;
+        } else if(field[start_row][start_column] == null) {
+            return false;
+        } else if (! field[start_row][start_column].getPlayer().equals(player)) {
+            return false;
+        } else if (Math.abs(end_row - start_row) > 2 | Math.abs(end_column - start_column) > 2) {
+            return false;
+        } else if (field[end_row][end_column] != null) {
+            return false;
+        }
+        return true;
     }
 
     /**
