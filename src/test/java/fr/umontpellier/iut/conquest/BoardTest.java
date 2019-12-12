@@ -32,7 +32,6 @@ class BoardTest {
         b.initField(player1, player2);
     }
 
-    @Disabled
     @Test
     void at_the_start_top_left_pawn_should_belong_to_player1() {
         assertEquals(1, b.getField()[0][0].getPlayer().getColor());
