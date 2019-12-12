@@ -82,6 +82,7 @@ public class Board {
         field[0][0] = new Pawn(player1);
         field[size-1][size-1] = new Pawn(player1);
         field[0][size-1] = new Pawn(player2);
+        field[size-1][0] = new Pawn(player2);
     }
 
     /**

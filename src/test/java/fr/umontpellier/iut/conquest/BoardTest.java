@@ -47,7 +47,6 @@ class BoardTest {
         assertEquals(2, b.getField()[0][b.getSize() - 1].getPlayer().getColor());
     }
 
-    @Disabled
     @Test
     void at_the_start_bottom_right_pawn_should_belong_to_player2() {
         assertEquals(2, b.getField()[b.getSize() - 1][0].getPlayer().getColor());
