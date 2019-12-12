@@ -52,7 +52,6 @@ class BoardTest {
         assertEquals(2, b.getField()[b.getSize() - 1][0].getPlayer().getColor());
     }
 
-    @Disabled
     @Test
     void at_the_start_every_pawn_must_be_free_except_for_corner_pawns() {
         Pawn[][] tab = b.getField();
