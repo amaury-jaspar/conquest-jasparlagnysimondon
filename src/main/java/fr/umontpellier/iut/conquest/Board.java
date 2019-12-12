@@ -78,7 +78,9 @@ public class Board {
      * - player2 commence le jeu avec un pion en haut à droite et un pion en bas à gauche.
      */
     public void initField(Player player1, Player player2) {
+        int size = getSize();
         field[0][0] = new Pawn(player1);
+        field[size-1][size-1] = new Pawn(player1);
     }
 
     /**
