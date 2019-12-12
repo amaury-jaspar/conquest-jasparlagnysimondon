@@ -64,79 +64,66 @@ class BoardTest {
         }
     }
 
-    @Disabled
     @Test
     void a_move_that_starts_from_a_negative_row_should_be_invalid() {
         assertFalse(b.isValid(new Move(-1, 0, 0, 1), player1));
     }
 
-    @Disabled
     @Test
     void a_move_that_starts_from_a_negative_column_should_be_invalid() {
         assertFalse(b.isValid(new Move(0, -1, 0, 1), player1));
     }
 
-    @Disabled
     @Test
     void a_move_that_starts_from_too_large_row_should_be_invalid() {
         assertFalse(b.isValid(new Move(b.getSize(), 0, 0, 1), player1));
     }
 
-    @Disabled
     @Test
     void a_move_that_starts_from_too_large_column_should_be_invalid() {
         assertFalse(b.isValid(new Move(0, b.getSize(), 0, 1), player1));
     }
 
-    @Disabled
     @Test
     void a_move_that_ends_in_a_negative_row_should_be_invalid() {
         assertFalse(b.isValid(new Move(0, 0, -1, 1), player1));
     }
 
-    @Disabled
     @Test
     void a_move_that_ends_in_a_negative_column_should_be_invalid() {
         assertFalse(b.isValid(new Move(0, 0, 0, -1), player1));
     }
 
-    @Disabled
     @Test
     void a_move_that_ends_in_a_too_large_row_should_be_invalid() {
         assertFalse(b.isValid(new Move(0, 0, b.getSize(), 1), player1));
     }
 
-    @Disabled
     @Test
     void a_move_that_ends_in_a_too_large_column_should_be_invalid() {
         assertFalse(b.isValid(new Move(0, 0, 0, b.getSize()), player1));
     }
 
-    @Disabled
     @Test
     void player1_should_not_be_able_to_move_a_pawn_that_does_not_exist() {
         assertFalse(b.isValid(new Move(0, 1, 0, 2), player1));
     }
 
-    @Disabled
     @Test
     void player2_should_not_be_able_to_move_a_pawn_that_does_not_exist() {
         assertFalse(b.isValid(new Move(0, 1, 0, 2), player2));
     }
 
-    @Disabled
     @Test
     void player2_should_not_be_able_to_move_a_pawn_from_player1() {
         assertFalse(b.isValid(new Move(0, 0, 0, 1), player2));
     }
 
-    @Disabled
     @Test
     void player1_should_not_be_able_to_move_a_pawn_from_player2() {
         assertFalse(b.isValid(new Move(0, b.getSize() - 1, 0, b.getSize() - 2), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_to_a_free_cell() {
         assertTrue(b.isValid(new Move(0, 0, 0, 1), player1));
@@ -149,49 +136,41 @@ class BoardTest {
         assertFalse(b.isValid(new Move(0, 0, 0, 1), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_one_cell_right() {
         assertTrue(b.isValid(new Move(0, 0, 0, 1), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_one_cell_left() {
         assertTrue(b.isValid(new Move(0, b.getSize() - 1, 0, b.getSize() - 2), player2));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_one_cell_up() {
         assertTrue(b.isValid(new Move(b.getSize() - 1, b.getSize() - 1, b.getSize() - 2, b.getSize() - 1), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_one_cell_down() {
         assertTrue(b.isValid(new Move(0, 0, 1, 0), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_one_cell_up_left() {
         assertTrue(b.isValid(new Move(b.getSize() - 1, b.getSize() - 1, b.getSize() - 2, b.getSize() - 2), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_one_cell_up_right() {
         assertTrue(b.isValid(new Move(b.getSize() - 1, 0, b.getSize() - 2, 1), player2));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_one_cell_down_left() {
         assertTrue(b.isValid(new Move(0, b.getSize() - 1, 1, b.getSize() - 2), player2));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_one_cell_down_right() {
         assertTrue(b.isValid(new Move(0, 0, 1, 1), player1));
@@ -259,91 +238,76 @@ class BoardTest {
         assertTrue(b.isValid(new Move(0, 0, 0, 2), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_two_cells_left() {
         assertTrue(b.isValid(new Move(b.getSize() - 1, b.getSize() - 1, b.getSize() - 1, b.getSize() - 3), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_two_cells_up() {
         assertTrue(b.isValid(new Move(b.getSize() - 1, b.getSize() - 1, b.getSize() - 3, b.getSize() - 1), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_two_cells_down() {
         assertTrue(b.isValid(new Move(0, 0, 2, 0), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_two_cells_up_left() {
         assertTrue(b.isValid(new Move(b.getSize() - 1, b.getSize() - 1, b.getSize() - 3, b.getSize() - 3), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_two_cells_up_right() {
         assertTrue(b.isValid(new Move(b.getSize() - 1, 0, b.getSize() - 3, 2), player2));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_two_cells_down_right() {
         assertTrue(b.isValid(new Move(0, 0, 2, 2), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_two_cells_down_left() {
         assertTrue(b.isValid(new Move(0, b.getSize() - 1, 2, b.getSize() - 3), player2));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_two_cells_up_then_one_cell_left() {
         assertTrue(b.isValid(new Move(b.getSize() - 1, b.getSize() - 1, b.getSize() - 3, b.getSize() - 2), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_two_cells_up_then_one_cell_right() {
         assertTrue(b.isValid(new Move(b.getSize() - 1, 0, b.getSize() - 3, 1), player2));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_two_cells_down_then_one_cell_right() {
         assertTrue(b.isValid(new Move(0, 0, 2, 1), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_two_cells_down_then_one_cell_left() {
         assertTrue(b.isValid(new Move(0, b.getSize() - 1, 2, b.getSize() - 2), player2));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_two_cells_right_then_one_cell_down() {
         assertTrue(b.isValid(new Move(0, 0, 1, 2), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_two_cells_right_then_one_cell_up() {
         assertTrue(b.isValid(new Move(b.getSize() - 1, 0, b.getSize() - 2, 2), player2));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_two_cells_left_then_one_cell_up() {
         assertTrue(b.isValid(new Move(b.getSize() - 1, b.getSize() - 1, b.getSize() - 2, b.getSize() - 3), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_be_able_to_move_two_cells_left_then_one_cell_down() {
         assertTrue(b.isValid(new Move(0, b.getSize() - 1, 1, b.getSize() - 3), player2));
@@ -461,25 +425,21 @@ class BoardTest {
         assertNull(b.getField()[0][0]);
     }
 
-    @Disabled
     @Test
     void a_pawn_should_not_be_able_to_move_too_far_right() {
         assertFalse(b.isValid(new Move(0, 0, 0, 3), player1));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_not_be_able_to_move_too_far_left() {
         assertFalse(b.isValid(new Move(0, b.getSize() - 1, 0, b.getSize() - 4), player2));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_not_be_able_to_move_too_far_up() {
         assertFalse(b.isValid(new Move(b.getSize() - 1, b.getSize() - 1, b.getSize() - 4, b.getSize() - 1), player2));
     }
 
-    @Disabled
     @Test
     void a_pawn_should_not_be_able_to_move_too_far_down() {
         assertFalse(b.isValid(new Move(0, 0, 3, 0), player1));
