@@ -129,7 +129,24 @@ public class Board {
      *             - Dans tous les cas, une fois que le pion est déplacé, tous les pions se trouvant dans les cases adjacentes à sa case d'arrivée prennent sa couleur.
      */
     public void movePawn(Move move) {
-        throw new RuntimeException("Not implemented");
+        int col1 = move.getColumn1();
+        int row1 = move.getRow1();
+        int col2 = move.getColumn2();
+        int row2 = move.getRow2();
+        Player player = field[row1][col1].getPlayer();
+        if (Math.abs(col1-col2)==2 || Math.abs(row1-row2)==2) {
+            field[row1][col1] = null;
+        }
+        field[row2][col2] = new Pawn(player);
+        for (int i=row2-1; i<=row2+1; i++) {
+            for (int j=col2-1; j<=col2+1; j++) {
+                if (0<=i && i<getSize() && 0<=j && j<getSize()) {
+                    if (field[i][j] != null && !field[i][j].getPlayer().equals(player)) {
+                        field[i][j] = new Pawn(player);
+                    }
+                }
+            }
+        }
     }
 
     /**
