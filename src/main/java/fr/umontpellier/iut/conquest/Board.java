@@ -81,6 +81,7 @@ public class Board {
         int size = getSize();
         field[0][0] = new Pawn(player1);
         field[size-1][size-1] = new Pawn(player1);
+        field[0][size-1] = new Pawn(player2);
     }
 
     /**
