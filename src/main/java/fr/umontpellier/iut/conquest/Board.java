@@ -156,7 +156,7 @@ public class Board {
     }
 
     /**
-     * Retourne la liste de tous les pions d'un joueur.
+     * Retourne le nombre de pions d'un joueur.
      */
     public int getNbPawns(Player player) {
         int nbPawns = 0;
