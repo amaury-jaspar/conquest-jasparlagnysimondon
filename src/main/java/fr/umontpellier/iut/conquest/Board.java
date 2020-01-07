@@ -162,7 +162,7 @@ public class Board {
         int nbPawns = 0;
         for (Pawn[] row: field) {
             for(Pawn pawn : row) {
-                if(pawn.getPlayer().equals(player)) {
+                if(pawn != null && pawn.getPlayer().equals(player)) {
                     nbPawns++;
                 }
             }
