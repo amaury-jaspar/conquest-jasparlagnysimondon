@@ -139,7 +139,11 @@ public class Game {
      * Rappel : Le joueur qui gagne est celui qui possède le plus de pions.
      */
     public Player getWinner() {
-        throw new RuntimeException("Not implemented");
+        if (board.getNbPawns(players[0]) < board.getNbPawns(players[1])) {
+            return players[1];
+        } else {
+            return players[0];
+        }
     }
 
     /**
