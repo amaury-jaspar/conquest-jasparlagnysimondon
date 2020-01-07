@@ -438,6 +438,7 @@ class BoardTest {
         assertNull(b.getField()[0][1]);
     }
 
+    @Disabled
     @Test
     void from_starting_position_on_a_board_of_size_3_player1_should_be_able_to_move_top_left_pawn_and_bottom_right_to_every_free_cell() {
         Board board = new Board(3);
