@@ -45,7 +45,12 @@ class BoardTest2 {
         assertFalse(validMoves.contains(new Move(0, 0, -1, 0)));
         assertFalse(validMoves.contains(new Move(0, 0, 0, -1)));
         assertFalse(validMoves.contains(new Move(0, 0, 2, 2)));
+        assertFalse(validMoves.contains(new Move(0, 0, 0, 0)));
+    }
 
+    @Test
+    void a_pawn_should_not_be_able_to_move_from_a_place_to_the_same_place() {
+        assertFalse(b.isValid(new Move(0, 0, 0, 0), player1));
     }
 
 }
