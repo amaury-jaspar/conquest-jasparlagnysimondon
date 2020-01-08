@@ -1,5 +1,6 @@
 package fr.umontpellier.iut.conquest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -152,11 +153,36 @@ public class Board {
      * S'il n'y a de coup valide, retourne une liste vide.
      */
     public List<Move> getValidMoves(Player player) {
-        throw new RuntimeException("Not implemented");
+        // on déclare une liste de mouvements
+        ArrayList<Move> listValidMove = new ArrayList<>();
+
+        int size = getSize();
+        int col1;
+        int row1;
+
+        for (int i = 0; i < size; i++) {
+            col1 = i;
+            for (int j = 0; j < size; j++) {
+                row1 = j;
+                if (field[i][j] != null && field[i][j].getPlayer().equals(player)) {
+                    for (int col2 = col1-2; col2 <= col1+2; col2++) {
+                        for (int row2 = row1-2; row2 <=row1+2; row2++) {
+                            Move move = new Move(col1, row1, col2, row2);
+                            if (isValid(move, player)) {
+                                listValidMove.add(move);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return listValidMove;
+
     }
 
     /**
-     * Retourne la liste de tous les pions d'un joueur.
+     * Retourne le nombre de pions d'un joueur.
      */
     public int getNbPawns(Player player) {
         int nbPawns = 0;
