@@ -110,7 +110,7 @@ public class Game {
      * Initialise le jeu.
      */
     private void initGame() {
-        throw new RuntimeException("Not implemented");
+        board.initField(players[0],players[1]);
     }
 
     /**
@@ -131,7 +131,10 @@ public class Game {
      * - La partie est finie quand l'un des deux joueurs n'a plus de pions.
      */
     public boolean isFinished() {
-        throw new RuntimeException("Not implemented");
+        if (board.getNbPawns(players[0])+board.getNbPawns(players[1])==(board.getSize()*board.getSize())) {
+            return true;
+        }
+        return board.getNbPawns(players[0]) == 0 || board.getNbPawns(players[1]) == 0;
     }
 
     /**
