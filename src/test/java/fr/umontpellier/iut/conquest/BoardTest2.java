@@ -33,7 +33,7 @@ class BoardTest2 {
     }
 
     @Test
-    void from_starting_position_on_a_board_of_size_3_player1_should_be_able_to_move_top_left_pawn_and_bottom_right_to_every_free_cell() {
+    void from_starting_position_on_a_board_of_size_3_player1_should_not_be_able_to_move_outside_the_board_or_on_used_cell() {
         Board board = new Board(3);
         board.initField(player1, player2);
         List<Move> validMoves = board.getValidMoves(player1);
