@@ -1,5 +1,7 @@
 package fr.umontpellier.iut.conquest;
 
+import fr.umontpellier.iut.conquest.history.BoardHistory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -191,4 +193,28 @@ public class Board {
         }
         return nbPawns;
     }
+
+    public BoardHistory saveToMemento() {
+
+        // on va faire une deep copy de field, ce qui veut dire la copie exacte, sans problème de référence
+        // les 2 objets, field et copyfield, doivent être indépendant
+        Pawn[][] copyField = new Pawn[field.length][field.length];
+
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field.length; j++) {
+                if(field[i][j] != null) {
+                    copyField[i][j] = new Pawn(field[i][j].getPlayer());
+                }
+            }
+        }
+        // la deepcopy est terminé, on la donne au constructeur de boardMememto.
+        BoardHistory boardMemento = new BoardHistory(copyField);
+        return boardMemento;
+    }
+
+
+
+
+
+
 }
