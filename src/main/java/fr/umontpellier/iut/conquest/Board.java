@@ -212,7 +212,22 @@ public class Board {
         return boardMemento;
     }
 
+    public void undoFromMemento(BoardHistory memento) {
 
+        Pawn[][] toRestaure = memento.getState();
+        Pawn[][] newField = new Pawn[field.length][field.length];
+
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field.length; j++) {
+
+                if(toRestaure[i][j] != null) {
+                    newField[i][j] = new Pawn(toRestaure[i][j].getPlayer());
+                }
+
+            }
+        }
+        this.field = newField;
+    }
 
 
 
