@@ -229,6 +229,26 @@ public class Board {
         this.field = newField;
     }
 
+    private Pawn[][] getFieldCopy(Pawn[][] initialField) {
+        Pawn[][] fieldCopy = new Pawn[initialField.length][initialField.length];
+
+        for (int i = 0; i < initialField.length; i++) {
+            for (int j = 0; j < initialField.length; j++) {
+                if(initialField[i][j] != null) {
+                    fieldCopy[i][j] = new Pawn(initialField[i][j].getPlayer());
+                }
+            }
+        }
+        return fieldCopy;
+    }
+
+    public Board getBoardCopy() {
+        Pawn[][] fieldCopy = getFieldCopy(field);
+        Board boardCopy = new Board(field.length);
+        boardCopy.field = fieldCopy;
+        return boardCopy;
+    }
+
 
 
 
