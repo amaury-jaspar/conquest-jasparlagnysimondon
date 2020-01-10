@@ -16,7 +16,16 @@ public class Minmax implements Strategy {
 
     @Override
     public Move getMove(Board board, Player player) {
-        throw new RuntimeException("Not implemented yet");
+        double maxPoints = Double.NEGATIVE_INFINITY;
+        Move bestMove = null;
+        for(Move move : board.getValidMoves(player)) {
+            double points = minmax(board, player, level-1, false);
+            if (points > maxPoints) {
+                bestMove = move;
+            }
+            maxPoints = Math.max(maxPoints, points);
+        }
+        return bestMove;
     }
 
     public double minmax(Board board, Player player, int depth, boolean maximizingPlayer) {
