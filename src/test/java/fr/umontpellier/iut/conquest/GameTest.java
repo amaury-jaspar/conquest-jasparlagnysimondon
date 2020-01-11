@@ -96,7 +96,7 @@ class GameTest {
         assertEquals(player2, game.getWinner());
     }
 
-    @Disabled
+
     @Test
     void test_undo_one_move() {
         // Create input
@@ -162,7 +162,7 @@ class GameTest {
         // Not undoing player1 first move
         input = input + "0 ";
 
-        // Set player2 first move to (2,0) -> (1,0)
+        // Set player2 first move to (2,0) -> (1,2)
         input = input + "2 0 ";
         input = input + "1 2 ";
         /*

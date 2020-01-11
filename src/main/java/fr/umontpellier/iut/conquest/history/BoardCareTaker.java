@@ -16,5 +16,5 @@ public class BoardCareTaker {
         mementos.push(memento);
     }
 
-
+    public boolean isEmpty() {return mementos.isEmpty();}
 }
