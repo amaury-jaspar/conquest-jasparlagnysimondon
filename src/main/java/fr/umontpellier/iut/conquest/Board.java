@@ -195,39 +195,32 @@ public class Board {
     }
 
     public BoardHistory saveToMemento() {
-
-        // on va faire une deep copy de field, ce qui veut dire la copie exacte, sans problème de référence
-        // les 2 objets, field et copyfield, doivent être indépendant
-        Pawn[][] copyField = new Pawn[field.length][field.length];
-
-        for (int i = 0; i < field.length; i++) {
-            for (int j = 0; j < field.length; j++) {
-                if(field[i][j] != null) {
-                    copyField[i][j] = new Pawn(field[i][j].getPlayer());
-                }
-            }
-        }
-        // la deepcopy est terminé, on la donne au constructeur de boardMememto.
+        Pawn[][] copyField = getFieldCopy(this.field);
         BoardHistory boardMemento = new BoardHistory(copyField);
         return boardMemento;
     }
 
     public void undoFromMemento(BoardHistory memento) {
+        this.field = getFieldCopy(memento.getState());
+    }
 
-        Pawn[][] toRestaure = memento.getState();
-        Pawn[][] newField = new Pawn[field.length][field.length];
+    private Pawn[][] getFieldCopy(Pawn[][] initialField) {
+        Pawn[][] fieldCopy = new Pawn[initialField.length][initialField.length];
 
-        for (int i = 0; i < field.length; i++) {
-            for (int j = 0; j < field.length; j++) {
-                if(toRestaure[i][j] != null) {
-                    newField[i][j] = new Pawn(toRestaure[i][j].getPlayer());
+        for (int i = 0; i < initialField.length; i++) {
+            for (int j = 0; j < initialField.length; j++) {
+                if(initialField[i][j] != null) {
+                    fieldCopy[i][j] = new Pawn(initialField[i][j].getPlayer());
                 }
             }
         }
-        this.field = newField;
+        return fieldCopy;
     }
 
-
-
-
+    public Board getBoardCopy() {
+        Pawn[][] fieldCopy = getFieldCopy(field);
+        Board boardCopy = new Board(field.length);
+        boardCopy.field = fieldCopy;
+        return boardCopy;
+    }
 }
