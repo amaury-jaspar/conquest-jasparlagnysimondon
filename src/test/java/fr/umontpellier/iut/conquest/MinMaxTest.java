@@ -12,15 +12,21 @@ public class MinMaxTest {
     private Board board;
     Game game;
     private Minmax minMax;
+    private Player player1;
+    private Player aiPlayer;
+
+    @BeforeEach
+    void setup() {
+        game = new Game(board, null, null, minMax, null);
+        player1 = game.getPlayers()[0];
+        aiPlayer = game.getPlayers()[1];
+    }
 
     @Test
     void move_should_be_valid_for_depth_1() {
         minMax = new Minmax(1);
-        Board board = new Board(3);
-        game = new Game(board, null, null, minMax, null);
-        Player player1 = game.getPlayers()[0];
-        Player aiPlayer = game.getPlayers()[1];
-        game.getBoard().initField(player1, aiPlayer);
+        board = new Board(3);
+        board.initField(player1, aiPlayer);
         Move move = minMax.getMove(board, aiPlayer);
 
         assertTrue(board.isValid(move, aiPlayer));
@@ -29,11 +35,8 @@ public class MinMaxTest {
     @Test
     void move_should_be_the_best_possible_for_depth_1() {
         minMax = new Minmax(1);
-        Board board = new Board(3);
-        game = new Game(board, null, null, minMax, null);
-        Player player1 = game.getPlayers()[0];
-        Player aiPlayer = game.getPlayers()[1];
-        game.getBoard().initField(player1, aiPlayer);
+        board = new Board(3);
+        board.initField(player1, aiPlayer);
         Move move = minMax.getMove(board, aiPlayer);
         board.movePawn(move);
 
