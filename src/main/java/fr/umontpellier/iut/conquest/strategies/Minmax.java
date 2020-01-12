@@ -19,7 +19,9 @@ public class Minmax implements Strategy {
         double maxPoints = Double.NEGATIVE_INFINITY;
         Move bestMove = null;
         for(Move move : board.getValidMoves(player)) {
-            double points = minmax(board, player, level-1, false);
+            Board currentBoard = board.getBoardCopy();
+            currentBoard.movePawn(move);
+            double points = minmax(currentBoard, player, level-1, false);
             if (points > maxPoints) {
                 bestMove = move;
             }
