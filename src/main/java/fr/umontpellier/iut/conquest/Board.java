@@ -223,8 +223,4 @@ public class Board {
         boardCopy.field = fieldCopy;
         return boardCopy;
     }
-
-
-
-
 }
