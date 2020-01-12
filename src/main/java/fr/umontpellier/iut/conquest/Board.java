@@ -195,38 +195,13 @@ public class Board {
     }
 
     public BoardHistory saveToMemento() {
-
-        // on va faire une deep copy de field, ce qui veut dire la copie exacte, sans problème de référence
-        // les 2 objets, field et copyfield, doivent être indépendant
-        Pawn[][] copyField = new Pawn[field.length][field.length];
-
-        for (int i = 0; i < field.length; i++) {
-            for (int j = 0; j < field.length; j++) {
-                if(field[i][j] != null) {
-                    copyField[i][j] = new Pawn(field[i][j].getPlayer());
-                }
-            }
-        }
-        // la deepcopy est terminé, on la donne au constructeur de boardMememto.
+        Pawn[][] copyField = getFieldCopy(this.field);
         BoardHistory boardMemento = new BoardHistory(copyField);
         return boardMemento;
     }
 
     public void undoFromMemento(BoardHistory memento) {
-
-        Pawn[][] toRestaure = memento.getState();
-        Pawn[][] newField = new Pawn[field.length][field.length];
-
-        for (int i = 0; i < field.length; i++) {
-            for (int j = 0; j < field.length; j++) {
-
-                if(toRestaure[i][j] != null) {
-                    newField[i][j] = new Pawn(toRestaure[i][j].getPlayer());
-                }
-
-            }
-        }
-        this.field = newField;
+        this.field = getFieldCopy(memento.getState());
     }
 
     private Pawn[][] getFieldCopy(Pawn[][] initialField) {
