@@ -166,26 +166,17 @@ public class Game {
      * @return Player : le joueur dont il est le tour de jouer.
      */
     private Player confirmOrUndoMove(Player player) {
-        BoardHistory boardHistory = board.saveToMemento();
-        boardCareTaker.addMemento(boardHistory);
         int answer = askConfirmOrUndoMove();
-        System.out.println(player+" : "+answer);
-        while (answer == 1) {
-            boardCareTaker.getMemento();
-            boardHistory = boardCareTaker.getMemento();
+        while (!boardCareTaker.isAtTheBeginning() && answer == 1) {
+            BoardHistory boardHistory = boardCareTaker.getMemento();
             board.undoFromMemento(boardHistory);
-            System.out.println(board);
             player = getOtherPlayer(player);
-            if (boardCareTaker.isAtTheBeginning()) {
-                System.out.println(player+" : beginning");
-                answer = 0;
-            } else {
+            if (!boardCareTaker.isAtTheBeginning()) {
                 answer = askConfirmOrUndoMove();
-                BoardHistory currentState = board.saveToMemento();
-                boardCareTaker.addMemento(currentState);
-                System.out.println(player+" : "+answer);
             }
         }
+        BoardHistory boardHistory = board.saveToMemento();
+        boardCareTaker.addMemento(boardHistory);
         return player;
     }
 
