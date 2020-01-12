@@ -1,5 +1,7 @@
 package fr.umontpellier.iut.conquest;
 
+import fr.umontpellier.iut.conquest.history.BoardCareTaker;
+import fr.umontpellier.iut.conquest.history.BoardHistory;
 import fr.umontpellier.iut.conquest.strategies.Strategy;
 
 import java.io.InputStream;
@@ -22,6 +24,8 @@ public class Game {
      * Les joueurs.
      */
     private Player[] players = new Player[2];
+
+    private BoardCareTaker boardCareTaker = new BoardCareTaker();
 
     /**
      * Constructeur.
@@ -111,6 +115,8 @@ public class Game {
      */
     private void initGame() {
         board.initField(players[0],players[1]);
+        BoardHistory boardHistory = board.saveToMemento();
+        boardCareTaker.addMemento(boardHistory);
     }
 
     /**
@@ -160,7 +166,27 @@ public class Game {
      * @return Player : le joueur dont il est le tour de jouer.
      */
     private Player confirmOrUndoMove(Player player) {
-        throw new RuntimeException("Not implemented");
+        int answer = askConfirmOrUndoMove();
+        while (!boardCareTaker.isAtTheBeginning() && answer == 1) {
+            BoardHistory boardHistory = boardCareTaker.getMemento();
+            board.undoFromMemento(boardHistory);
+            player = getOtherPlayer(player);
+            if (!boardCareTaker.isAtTheBeginning()) {
+                answer = askConfirmOrUndoMove();
+            }
+        }
+        BoardHistory boardHistory = board.saveToMemento();
+        boardCareTaker.addMemento(boardHistory);
+        return player;
+    }
+
+    public int askConfirmOrUndoMove() {
+        int answer;
+        do {
+            System.out.println("Entrez 1 si vous voulez annuler un coup ou 0 pour confirmer votre coup :");
+            answer = scan.nextInt();
+        } while (answer != 0 && answer != 1);
+        return answer;
     }
 }
 
