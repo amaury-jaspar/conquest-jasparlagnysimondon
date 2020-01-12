@@ -16,5 +16,7 @@ public class BoardCareTaker {
         mementos.push(memento);
     }
 
-    public boolean isEmpty() {return mementos.isEmpty();}
+    public boolean isAtTheBeginning() {return mementos.size() == 0;}
+
+    public int size() {return mementos.size();}
 }

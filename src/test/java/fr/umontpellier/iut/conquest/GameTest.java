@@ -12,7 +12,7 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
-
+/*
     @BeforeEach
     void disableConsole() {
         System.setOut(new PrintStream(new OutputStream() {
@@ -22,7 +22,7 @@ class GameTest {
             }
         }));
 
-    }
+    }*/
 
     void set_input(String input) {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());

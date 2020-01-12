@@ -169,14 +169,21 @@ public class Game {
         BoardHistory boardHistory = board.saveToMemento();
         boardCareTaker.addMemento(boardHistory);
         int answer = askConfirmOrUndoMove();
+        System.out.println(player+" : "+answer);
         while (answer == 1) {
+            boardCareTaker.getMemento();
             boardHistory = boardCareTaker.getMemento();
             board.undoFromMemento(boardHistory);
+            System.out.println(board);
             player = getOtherPlayer(player);
-            if (boardCareTaker.isEmpty()) {
+            if (boardCareTaker.isAtTheBeginning()) {
+                System.out.println(player+" : beginning");
                 answer = 0;
             } else {
                 answer = askConfirmOrUndoMove();
+                BoardHistory currentState = board.saveToMemento();
+                boardCareTaker.addMemento(currentState);
+                System.out.println(player+" : "+answer);
             }
         }
         return player;
