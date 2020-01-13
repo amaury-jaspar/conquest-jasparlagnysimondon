@@ -28,7 +28,6 @@ public class Minmax implements Strategy {
      */
     @Override
     public Move getMove(Board board, Player player) {
-        //Board boardCopy = board.getBoardCopy();
         minimax(board, player, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, level, true);
         return bestMove;
     }
