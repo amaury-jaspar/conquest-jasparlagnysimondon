@@ -10,10 +10,20 @@ public class Minmax implements Strategy {
 
     private final int level;
 
+    /**
+     * Constructeur
+     * @param level le niveau de difficulté de l'IA
+     */
     public Minmax(int level) {
         this.level = level;
     }
 
+    /**
+     * Retourne le meilleur coup possible en fonction de la difficulté choisie
+     * @param board le plateau de jeu dans l'état donné
+     * @param player le joueur dont on détermine les coups (IA)
+     * @return un Move
+     */
     @Override
     public Move getMove(Board board, Player player) {
         double maxPoints = Double.NEGATIVE_INFINITY;
@@ -31,6 +41,16 @@ public class Minmax implements Strategy {
         return bestMove;
     }
 
+    /**
+     * Retourne le score le plus élevé au prochain tour en fonctions des déplacements disponibles et du nombre de coups
+     * calculés à l'avance
+     * @param board le plateau de jeu en l'état actuel
+     * @param player le joueur pour lequel on calcule les coups possibles
+     * @param depth la profondeur de l'arbre = le nombre de coups prévus à l'avance
+     * @param maximizingPlayer boolean déterminant si l'on cherche le score maximum
+     *                         ou le score minimum
+     * @return le meilleur score pour {@code player}
+     */
     public double minimax(Board board, Player player, int depth, boolean maximizingPlayer) {
         List<Move> movesList = board.getValidMoves(player);
         Player otherPlayer = player.getGame().getOtherPlayer(player);
