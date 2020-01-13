@@ -40,7 +40,7 @@ public class Minmax implements Strategy {
             }
             maxPoints = Math.max(maxPoints, points);
             alpha = Math.max(alpha, points);
-            if (beta <= alpha) {
+            if (beta <= alpha || player.getGame().isFinished()) {
                 break;
             }
         }
@@ -63,7 +63,7 @@ public class Minmax implements Strategy {
         List<Move> playerMovesList = board.getValidMoves(player);
         Player otherPlayer = player.getGame().getOtherPlayer(player);
         List<Move> otherPlayerMovesList = board.getValidMoves(otherPlayer);
-        if(depth == 0 || playerMovesList.isEmpty() || player.getGame().isFinished()) {
+        if(depth == 0 || playerMovesList.isEmpty() || otherPlayerMovesList.isEmpty() || player.getGame().isFinished()) {
             return board.getNbPawns(player) - board.getNbPawns(otherPlayer);
         }
         if (maximizingPlayer) {
