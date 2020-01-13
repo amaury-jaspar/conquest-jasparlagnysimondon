@@ -29,6 +29,8 @@ public class Minmax implements Strategy {
         double maxPoints = Double.NEGATIVE_INFINITY;
         Move bestMove = null;
         List<Move> movesList = board.getValidMoves(player);
+        double alpha = Double.NEGATIVE_INFINITY;
+        double beta = Double.POSITIVE_INFINITY;
         for(Move move : movesList) {
             Board currentBoard = board.getBoardCopy();
             currentBoard.movePawn(move);
@@ -37,6 +39,10 @@ public class Minmax implements Strategy {
                 bestMove = move;
             }
             maxPoints = Math.max(maxPoints, points);
+            alpha = Math.max(alpha, points);
+            if (beta <= alpha) {
+                break;
+            }
         }
         return bestMove;
     }
