@@ -40,7 +40,7 @@ public class Minmax implements Strategy {
             }
             maxPoints = Math.max(maxPoints, points);
             alpha = Math.max(alpha, points);
-            if (beta <= alpha || player.getGame().isFinished()) {
+            if (beta <= alpha) {
                 break;
             }
         }

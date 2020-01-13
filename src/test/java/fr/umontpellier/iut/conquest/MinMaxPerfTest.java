@@ -18,7 +18,6 @@ public class MinMaxPerfTest {
         game.run(1);
         long endTime = System.nanoTime() - startTime;
 
-        System.out.println(endTime);
         assertTrue(endTime < 30000000000.); //30 000 000 000 nano seconds = 30s
     }
 }
