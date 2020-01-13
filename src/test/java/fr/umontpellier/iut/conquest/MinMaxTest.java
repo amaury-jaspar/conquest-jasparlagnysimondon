@@ -54,7 +54,6 @@ public class MinMaxTest {
         assertEquals(1, move.getColumn2());
     }
 
-    @Disabled
     @Test
     void move_should_be_the_best_possible_for_new_board_of_size_5_and_AI_level_2() {
         minMax = new Minmax(2);
@@ -109,9 +108,9 @@ public class MinMaxTest {
          */
 
         assertEquals(0, move.getRow1());
-        assertEquals(0, move.getColumn1());
-        assertEquals(2, move.getRow2());
-        assertEquals(0, move.getColumn2());
+        assertEquals(1, move.getColumn1());
+        assertEquals(1, move.getRow2());
+        assertEquals(3, move.getColumn2());
     }
 
     @Test
