@@ -172,6 +172,7 @@ public class Game {
             board.undoFromMemento(boardHistory);
             player = getOtherPlayer(player);
             if (!boardCareTaker.isAtTheBeginning()) {
+                System.out.println(board);
                 answer = askConfirmOrUndoMove();
             }
         }
