@@ -18,10 +18,11 @@ public class Minmax implements Strategy {
     public Move getMove(Board board, Player player) {
         double maxPoints = Double.NEGATIVE_INFINITY;
         Move bestMove = null;
-        for(Move move : board.getValidMoves(player)) {
+        List<Move> movesList = board.getValidMoves(player);
+        for(Move move : movesList) {
             Board currentBoard = board.getBoardCopy();
             currentBoard.movePawn(move);
-            double points = minmax(currentBoard, player, level-1, false);
+            double points = minimax(currentBoard, player.getGame().getOtherPlayer(player), level-1, false);
             if (points > maxPoints) {
                 bestMove = move;
             }
@@ -30,17 +31,18 @@ public class Minmax implements Strategy {
         return bestMove;
     }
 
-    public double minmax(Board board, Player player, int depth, boolean maximizingPlayer) {
+    public double minimax(Board board, Player player, int depth, boolean maximizingPlayer) {
         List<Move> movesList = board.getValidMoves(player);
+        Player otherPlayer = player.getGame().getOtherPlayer(player);
         if(depth == 0 || movesList.isEmpty()) {
-            return board.getNbPawns(player) - board.getNbPawns(player.getGame().getOtherPlayer(player));
+            return board.getNbPawns(otherPlayer) - board.getNbPawns(player);
         }
         if (maximizingPlayer) {
             double maxEval = Double.NEGATIVE_INFINITY;
             for (Move move : movesList) {
                 Board currentBoard = board.getBoardCopy();
                 currentBoard.movePawn(move);
-                double eval = minmax(currentBoard, player, depth-1, false);
+                double eval = minimax(currentBoard, otherPlayer, depth-1, false);
                 maxEval = Math.max(maxEval, eval);
             }
             return maxEval;
@@ -49,8 +51,8 @@ public class Minmax implements Strategy {
             for (Move move : movesList) {
                 Board currentBoard = board.getBoardCopy();
                 currentBoard.movePawn(move);
-                double eval = minmax(currentBoard, player, depth-1, true);
-                minEval = Math.max(minEval, eval);
+                double eval = minimax(currentBoard, otherPlayer, depth-1, true);
+                minEval = Math.min(minEval, eval);
             }
             return minEval;
         }
