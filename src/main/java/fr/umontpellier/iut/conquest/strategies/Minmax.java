@@ -17,7 +17,7 @@ public class Minmax implements Strategy {
      */
     public Minmax(int level) {
         this.level = level;
-//        bestMove = null;
+        bestMove = null;
     }
 
     /**
