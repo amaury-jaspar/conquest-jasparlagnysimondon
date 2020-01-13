@@ -9,6 +9,7 @@ import java.util.List;
 public class Minmax implements Strategy {
 
     private final int level;
+    private Move bestMove;
 
     /**
      * Constructeur
@@ -16,34 +17,19 @@ public class Minmax implements Strategy {
      */
     public Minmax(int level) {
         this.level = level;
+//        bestMove = null;
     }
 
     /**
      * Retourne le meilleur coup possible en fonction de la difficulté choisie
      * @param board le plateau de jeu dans l'état donné
      * @param player le joueur dont on détermine les coups (IA)
-     * @return un Move
+     * @return le meilleur move en fonction de la difficulté et du board donné
      */
     @Override
     public Move getMove(Board board, Player player) {
-        double maxPoints = Double.NEGATIVE_INFINITY;
-        Move bestMove = null;
-        List<Move> movesList = board.getValidMoves(player);
-        double alpha = Double.NEGATIVE_INFINITY;
-        double beta = Double.POSITIVE_INFINITY;
-        for(Move move : movesList) {
-            Board currentBoard = board.getBoardCopy();
-            currentBoard.movePawn(move);
-            double points = minimax(currentBoard, player, alpha, beta, level-1, false);
-            if (points > maxPoints) {
-                bestMove = move;
-            }
-            maxPoints = Math.max(maxPoints, points);
-            alpha = Math.max(alpha, points);
-            if (beta <= alpha || player.getGame().isFinished()) {
-                break;
-            }
-        }
+        //Board boardCopy = board.getBoardCopy();
+        minimax(board, player, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, level, true);
         return bestMove;
     }
 
@@ -72,11 +58,15 @@ public class Minmax implements Strategy {
                 Board currentBoard = board.getBoardCopy();
                 currentBoard.movePawn(move);
                 double eval = minimax(currentBoard, player, alpha, beta, depth-1, false);
+                if (eval > maxEval && depth == level) {
+                    setBestMove(move);
+                }
                 maxEval = Math.max(maxEval, eval);
                 alpha = Math.max(alpha, eval);
                 if (beta <= alpha) {
-                    break;
+                   break;
                 }
+
             }
             return maxEval;
         } else {
@@ -93,5 +83,9 @@ public class Minmax implements Strategy {
             }
             return minEval;
         }
+    }
+
+    private void setBestMove(Move move) {
+        bestMove = move;
     }
 }
