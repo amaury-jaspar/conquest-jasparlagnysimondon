@@ -32,7 +32,7 @@ public class Minmax implements Strategy {
         for(Move move : movesList) {
             Board currentBoard = board.getBoardCopy();
             currentBoard.movePawn(move);
-            double points = minimax(currentBoard, player, level-1, false);
+            double points = minimax(currentBoard, player, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, level-1, false);
             if (points > maxPoints) {
                 bestMove = move;
             }
@@ -51,7 +51,7 @@ public class Minmax implements Strategy {
      *                         ou le score minimum
      * @return le meilleur score pour {@code player}
      */
-    public double minimax(Board board, Player player, int depth, boolean maximizingPlayer) {
+    public double minimax(Board board, Player player, double alpha, double beta, int depth, boolean maximizingPlayer) {
         List<Move> playerMovesList = board.getValidMoves(player);
         Player otherPlayer = player.getGame().getOtherPlayer(player);
         List<Move> otherPlayerMovesList = board.getValidMoves(otherPlayer);
@@ -63,8 +63,12 @@ public class Minmax implements Strategy {
             for (Move move : playerMovesList) {
                 Board currentBoard = board.getBoardCopy();
                 currentBoard.movePawn(move);
-                double eval = minimax(currentBoard, player, depth-1, false);
+                double eval = minimax(currentBoard, player, alpha, beta, depth-1, false);
                 maxEval = Math.max(maxEval, eval);
+                alpha = Math.max(alpha, eval);
+                if (beta <= alpha) {
+                    break;
+                }
             }
             return maxEval;
         } else {
@@ -72,8 +76,12 @@ public class Minmax implements Strategy {
             for (Move move : otherPlayerMovesList) {
                 Board currentBoard = board.getBoardCopy();
                 currentBoard.movePawn(move);
-                double eval = minimax(currentBoard, player, depth-1, true);
+                double eval = minimax(currentBoard, player, alpha, beta,depth-1, true);
                 minEval = Math.min(minEval, eval);
+                beta = Math.min(beta, eval);
+                if (beta <= alpha) {
+                    break;
+                }
             }
             return minEval;
         }
