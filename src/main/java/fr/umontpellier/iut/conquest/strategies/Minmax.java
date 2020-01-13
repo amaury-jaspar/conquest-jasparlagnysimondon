@@ -29,29 +29,37 @@ public class Minmax implements Strategy {
         double maxPoints = Double.NEGATIVE_INFINITY;
         Move bestMove = null;
         List<Move> movesList = board.getValidMoves(player);
+        double alpha = Double.NEGATIVE_INFINITY;
+        double beta = Double.POSITIVE_INFINITY;
         for(Move move : movesList) {
             Board currentBoard = board.getBoardCopy();
             currentBoard.movePawn(move);
-            double points = minimax(currentBoard, player, level-1, false);
+            double points = minimax(currentBoard, player, alpha, beta, level-1, false);
             if (points > maxPoints) {
                 bestMove = move;
             }
             maxPoints = Math.max(maxPoints, points);
+            alpha = Math.max(alpha, points);
+            if (beta <= alpha) {
+                break;
+            }
         }
         return bestMove;
     }
 
     /**
-     * Retourne le score le plus élevé au prochain tour en fonctions des déplacements disponibles et du nombre de coups
-     * calculés à l'avance
+     *Retourne le score le plus élevé au prochain tour en fonctions des déplacements disponibles et du nombre de coups
+     *calculés à l'avance
+     *
      * @param board le plateau de jeu en l'état actuel
      * @param player le joueur pour lequel on calcule les coups possibles
+     * @param alpha
+     * @param beta
      * @param depth la profondeur de l'arbre = le nombre de coups prévus à l'avance
-     * @param maximizingPlayer boolean déterminant si l'on cherche le score maximum
-     *                         ou le score minimum
+     * @param maximizingPlayer boolean déterminant si l'on cherche le score maximum ou le score minimum
      * @return le meilleur score pour {@code player}
      */
-    public double minimax(Board board, Player player, int depth, boolean maximizingPlayer) {
+    public double minimax(Board board, Player player, double alpha, double beta, int depth, boolean maximizingPlayer) {
         List<Move> playerMovesList = board.getValidMoves(player);
         Player otherPlayer = player.getGame().getOtherPlayer(player);
         List<Move> otherPlayerMovesList = board.getValidMoves(otherPlayer);
@@ -63,8 +71,12 @@ public class Minmax implements Strategy {
             for (Move move : playerMovesList) {
                 Board currentBoard = board.getBoardCopy();
                 currentBoard.movePawn(move);
-                double eval = minimax(currentBoard, player, depth-1, false);
+                double eval = minimax(currentBoard, player, alpha, beta, depth-1, false);
                 maxEval = Math.max(maxEval, eval);
+                alpha = Math.max(alpha, eval);
+                if (beta <= alpha) {
+                    break;
+                }
             }
             return maxEval;
         } else {
@@ -72,8 +84,12 @@ public class Minmax implements Strategy {
             for (Move move : otherPlayerMovesList) {
                 Board currentBoard = board.getBoardCopy();
                 currentBoard.movePawn(move);
-                double eval = minimax(currentBoard, player, depth-1, true);
+                double eval = minimax(currentBoard, player, alpha, beta,depth-1, true);
                 minEval = Math.min(minEval, eval);
+                beta = Math.min(beta, eval);
+                if (beta <= alpha) {
+                    break;
+                }
             }
             return minEval;
         }
