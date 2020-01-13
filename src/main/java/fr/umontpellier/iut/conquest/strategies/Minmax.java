@@ -53,8 +53,8 @@ public class Minmax implements Strategy {
      *
      * @param board le plateau de jeu en l'état actuel
      * @param player le joueur pour lequel on calcule les coups possibles
-     * @param alpha
-     * @param beta
+     * @param alpha la meilleure valeur pour le "maximizingPlayer"
+     * @param beta la meilleure valeur pour le "minimizingPlayer"
      * @param depth la profondeur de l'arbre = le nombre de coups prévus à l'avance
      * @param maximizingPlayer boolean déterminant si l'on cherche le score maximum ou le score minimum
      * @return le meilleur score pour {@code player}
