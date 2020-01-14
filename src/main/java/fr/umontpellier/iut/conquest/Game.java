@@ -118,8 +118,7 @@ public class Game {
      */
     private void initGame() {
         board.initField(players[0],players[1]);
-        BoardHistory boardHistory = board.saveToMemento();
-        boardCareTaker.addMemento(boardHistory);
+        boardCareTaker.addMemento(board.saveToMemento());
     }
 
     /**
@@ -171,16 +170,13 @@ public class Game {
     private Player confirmOrUndoMove(Player player) {
         int answer = askConfirmOrUndoMove();
         while (!boardCareTaker.isAtTheBeginning() && answer == 1) {
-            BoardHistory boardHistory = boardCareTaker.getMemento();
-            board.undoFromMemento(boardHistory);
+            board.undoFromMemento(boardCareTaker.getMemento());
             player = getOtherPlayer(player);
             if (!boardCareTaker.isAtTheBeginning()) {
-                System.out.println(board);
                 answer = askConfirmOrUndoMove();
             }
         }
-        BoardHistory boardHistory = board.saveToMemento();
-        boardCareTaker.addMemento(boardHistory);
+        boardCareTaker.addMemento(board.saveToMemento());
         return player;
     }
 
