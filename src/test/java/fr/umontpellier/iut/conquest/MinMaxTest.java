@@ -162,7 +162,7 @@ public class MinMaxTest {
         Move move = minMax.getMove(board, aiPlayer);
         /*
          * __0_1_2_3_4
-         * 0|X X _ X X
+         * 0|X _ _ X X
          * 1|_ _ _ X _
          * 2|_ _ _ _ _
          * 3|_ _ _ _ _

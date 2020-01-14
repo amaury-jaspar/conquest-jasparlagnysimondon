@@ -163,9 +163,9 @@ public class Board {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (field[i][j] != null && field[i][j].getPlayer().equals(player)) {
-                    for (int col2 = i-2; col2 <= i+2; col2++) {
-                        for (int row2 = j-2; row2 <=j+2; row2++) {
-                            Move move = new Move(i, j, col2, row2);
+                    for (int row2 = i-2; row2 <= i+2; row2++) {
+                        for (int col2 = j-2; col2 <=j+2; col2++) {
+                            Move move = new Move(i, j, row2, col2);
                             if (isValid(move, player)) {
                                 listValidMove.add(move);
                             }
@@ -184,10 +184,10 @@ public class Board {
      */
     public int getNbPawns(Player player) {
         int nbPawns = 0;
-        for (Pawn[] row: field) {
-            for(Pawn pawn : row) {
-                if(pawn != null && pawn.getPlayer().equals(player)) {
-                    nbPawns++;
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field.length; j++) {
+                if(field[i][j] != null && field[i][j].getPlayer().equals(player)) {
+                    nbPawns = nbPawns + 1;
                 }
             }
         }
