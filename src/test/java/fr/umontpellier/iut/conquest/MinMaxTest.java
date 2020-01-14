@@ -220,4 +220,53 @@ public class MinMaxTest {
         assertEquals(3, move.getRow2());
         assertEquals(4, move.getColumn2());
     }
+
+    @Test
+    void aiPLayer_should_move_from_3_2_to_4_3(){
+       /*
+        * __0_1_2_3_4
+        * 0|_ X X X O
+        * 1|X X X X O
+        * 2|X X X X X
+        * 3|X O X X X
+        * 4|O O O _ O
+        */
+
+        minMax = new Minmax(4);
+
+        create_board_of_size_5();
+
+        field[0][0] = null;
+        field[0][1] = new Pawn(aiPlayer);
+        field[0][2] = new Pawn(aiPlayer);
+        field[0][3] = new Pawn(aiPlayer);
+        field[0][4] = new Pawn(player2);
+        field[1][0] = new Pawn(aiPlayer);
+        field[1][1] = new Pawn(aiPlayer);
+        field[1][2] = new Pawn(aiPlayer);
+        field[1][3] = new Pawn(aiPlayer);
+        field[1][4] = new Pawn(player2);
+        field[2][0] = new Pawn(aiPlayer);
+        field[2][1] = new Pawn(aiPlayer);
+        field[2][2] = new Pawn(aiPlayer);
+        field[2][3] = new Pawn(aiPlayer);
+        field[2][4] = new Pawn(aiPlayer);
+        field[3][0] = new Pawn(aiPlayer);
+        field[3][1] = new Pawn(player2);
+        field[3][2] = new Pawn(aiPlayer);
+        field[3][3] = new Pawn(aiPlayer);
+        field[3][4] = new Pawn(aiPlayer);
+        field[4][0] = new Pawn(player2);
+        field[4][1] = new Pawn(player2);
+        field[4][2] = new Pawn(player2);
+        field[4][3] = null;
+        field[4][4] = new Pawn(player2);
+
+        Move move = minMax.getMove(board, aiPlayer);
+
+        assertEquals(3, move.getRow1());
+        assertEquals(2, move.getColumn1());
+        assertEquals(4, move.getRow2());
+        assertEquals(3, move.getColumn2());
+    }
 }
