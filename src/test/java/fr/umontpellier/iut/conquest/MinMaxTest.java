@@ -1,7 +1,6 @@
 package fr.umontpellier.iut.conquest;
 
 import fr.umontpellier.iut.conquest.strategies.Minmax;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -173,5 +172,52 @@ public class MinMaxTest {
         assertEquals(1, move.getColumn1());
         assertEquals(1, move.getRow2());
         assertEquals(3, move.getColumn2());
+    }
+
+    @Test
+    void player_should_still_move_if_opponent_has_no_moves_left() {
+
+        minMax = new Minmax(4);
+
+        create_board_of_size_5();
+
+        field[0][0] = new Pawn(player2);
+        field[0][1] = new Pawn(player2);
+        field[0][2] = new Pawn(aiPlayer);
+        field[0][3] = new Pawn(aiPlayer);
+        field[0][4] = new Pawn(aiPlayer);
+        field[1][0] = new Pawn(player2);
+        field[1][1] = new Pawn(player2);
+        field[1][2] = new Pawn(aiPlayer);
+        field[1][3] = new Pawn(aiPlayer);
+        field[1][4] = new Pawn(aiPlayer);
+        field[2][0] = new Pawn(player2);
+        field[2][1] = new Pawn(player2);
+        field[2][2] = new Pawn(aiPlayer);
+        field[2][3] = new Pawn(aiPlayer);
+        field[2][4] = new Pawn(aiPlayer);
+        field[3][0] = new Pawn(player2);
+        field[3][1] = new Pawn(player2);
+        field[3][2] = new Pawn(aiPlayer);
+        field[3][3] = new Pawn(aiPlayer);
+        field[3][4] = null;
+        field[4][0] = new Pawn(player2);
+        field[4][1] = new Pawn(player2);
+        field[4][2] = new Pawn(aiPlayer);
+        field[4][3] = new Pawn(aiPlayer);
+        field[4][4] = new Pawn(aiPlayer);
+        /*
+         * __0_1_2_3_4
+         * 0|O O X O O
+         * 1|O O X X X
+         * 2|O O X X X
+         * 3|O O X X _
+         * 4|X O X X X
+         */
+
+        Move move = minMax.getMove(board, aiPlayer);
+
+        assertEquals(3, move.getRow2());
+        assertEquals(4, move.getColumn2());
     }
 }
