@@ -194,16 +194,27 @@ public class Board {
         return nbPawns;
     }
 
+    /**
+     * Réalise une deepCopy de l'attribut field et le passe en paramètre du constructeur d'un mememto
+     * Retourne ce nouveau memento, sauvegarde de l'état actuel du field de board
+     */
     public BoardHistory saveToMemento() {
         Pawn[][] copyField = getFieldCopy(this.field);
         BoardHistory boardMemento = new BoardHistory(copyField);
         return boardMemento;
     }
 
+    /**
+     * Réablit l'attribut field de this à l'état indiqué par le memento passé en paramètre
+     */
     public void undoFromMemento(BoardHistory memento) {
         this.field = getFieldCopy(memento.getState());
     }
 
+    /**
+     * Réalise une deepCopy (indépendante) du Pawn[][] passé en paramètre
+     * Retourne cette copie
+     */
     private Pawn[][] getFieldCopy(Pawn[][] initialField) {
         Pawn[][] fieldCopy = new Pawn[initialField.length][initialField.length];
 
@@ -217,6 +228,9 @@ public class Board {
         return fieldCopy;
     }
 
+    /**
+     * Retourne une deepCopy de this (objet board) mais indépendante
+     */
     public Board getBoardCopy() {
         Pawn[][] fieldCopy = getFieldCopy(field);
         Board boardCopy = new Board(field.length);

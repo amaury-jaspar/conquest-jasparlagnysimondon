@@ -25,6 +25,9 @@ public class Game {
      */
     private Player[] players = new Player[2];
 
+    /**
+     *
+     */
     private BoardCareTaker boardCareTaker = new BoardCareTaker();
 
     /**
@@ -181,6 +184,10 @@ public class Game {
         return player;
     }
 
+    /**
+     * Demande au joueur s'il veut confirmer ou annuler son coup
+     * Retourne sa réponse sous la forme d'un int, 0 si il confirme, 1 s'il annule
+     */
     public int askConfirmOrUndoMove() {
         int answer;
         do {
