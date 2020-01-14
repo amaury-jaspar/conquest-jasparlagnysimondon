@@ -21,7 +21,7 @@ public class Minmax implements Strategy {
     }
 
     /**
-     * Retourne le meilleur coup possible en fonction de la difficulté choisie
+     * Utilise minimax pour calculer le meilleur coup possible en fonction du niveau / profondeur et du plateau
      * @param board le plateau de jeu dans l'état donné
      * @param player le joueur dont on détermine les coups (IA)
      * @return le meilleur move en fonction de la difficulté et du board donné
@@ -46,11 +46,15 @@ public class Minmax implements Strategy {
      * @return le meilleur score pour {@code player}
      */
     public double minimax(Board board, Player player, double alpha, double beta, int depth, boolean maximizingPlayer) {
-        List<Move> playerMovesList = board.getValidMoves(player);
         Player otherPlayer = player.getGame().getOtherPlayer(player);
+        List<Move> playerMovesList = board.getValidMoves(player);
         List<Move> otherPlayerMovesList = board.getValidMoves(otherPlayer);
+
+        if (depth == 0 || player.getGame().isFinished()) {
+            return board.getNbPawns(player) - board.getNbPawns(otherPlayer);
+        }
         if (maximizingPlayer) {
-            if(depth == 0 || playerMovesList.isEmpty()) {
+            if(playerMovesList.isEmpty()) {
                 return board.getNbPawns(player) - board.getNbPawns(otherPlayer);
             }
             double maxEval = Double.NEGATIVE_INFINITY;
@@ -69,7 +73,7 @@ public class Minmax implements Strategy {
             }
             return maxEval;
         } else {
-            if(depth == 0 || otherPlayerMovesList.isEmpty()) {
+            if(otherPlayerMovesList.isEmpty()) {
                 return board.getNbPawns(player) - board.getNbPawns(otherPlayer);
             }
             double minEval = Double.POSITIVE_INFINITY;
@@ -87,6 +91,10 @@ public class Minmax implements Strategy {
         }
     }
 
+    /**
+     * Setter permettant de changer la valeur du meilleur move
+     * @param move un move valide sélectionné par minimax
+     */
     private void setBestMove(Move move) {
         bestMove = move;
     }
