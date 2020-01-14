@@ -9,6 +9,12 @@ import java.util.Random;
 
 public class Naive implements Strategy {
 
+    /**
+     * Sélectionne un move valide aléatoire et le renvoie
+     * @param board le plateau de jeu en l'état actuel
+     * @param player le joueur qui effectue le déplacement
+     * @return un move valide aléatoire ou null si la liste est vide
+     */
     @Override
     public Move getMove(Board board, Player player) {
         Random rand = new Random();
