@@ -28,7 +28,8 @@ public class Minmax implements Strategy {
      */
     @Override
     public Move getMove(Board board, Player player) {
-        minimax(board, player, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, level, true);
+        Board boardCopy = board.getBoardCopy();
+        minimax(boardCopy, player, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, level, true);
         return bestMove;
     }
 
@@ -48,10 +49,10 @@ public class Minmax implements Strategy {
         List<Move> playerMovesList = board.getValidMoves(player);
         Player otherPlayer = player.getGame().getOtherPlayer(player);
         List<Move> otherPlayerMovesList = board.getValidMoves(otherPlayer);
-        if(depth == 0 || playerMovesList.isEmpty() || otherPlayerMovesList.isEmpty() || player.getGame().isFinished()) {
-            return board.getNbPawns(player) - board.getNbPawns(otherPlayer);
-        }
         if (maximizingPlayer) {
+            if(depth == 0 || playerMovesList.isEmpty()) {
+                return board.getNbPawns(player) - board.getNbPawns(otherPlayer);
+            }
             double maxEval = Double.NEGATIVE_INFINITY;
             for (Move move : playerMovesList) {
                 Board currentBoard = board.getBoardCopy();
@@ -65,10 +66,12 @@ public class Minmax implements Strategy {
                 if (beta <= alpha) {
                    break;
                 }
-
             }
             return maxEval;
         } else {
+            if(depth == 0 || otherPlayerMovesList.isEmpty()) {
+                return board.getNbPawns(player) - board.getNbPawns(otherPlayer);
+            }
             double minEval = Double.POSITIVE_INFINITY;
             for (Move move : otherPlayerMovesList) {
                 Board currentBoard = board.getBoardCopy();
